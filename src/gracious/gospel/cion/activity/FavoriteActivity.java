@@ -100,8 +100,8 @@ public class FavoriteActivity extends Activity implements OnItemClickListener, O
 		AdMixerManager.getInstance().setAdapterDefaultAppCode(AdAdapter.ADAPTER_ADMOB, "ca-app-pub-4637651494513698/1163276165");
 		AdMixerManager.getInstance().setAdapterDefaultAppCode(AdAdapter.ADAPTER_ADMOB_FULL, "ca-app-pub-4637651494513698/2640009365");
 		
-//		addBannerView();
-		init_admob_naive();
+		addBannerView();
+//		init_admob_naive();
 		
 		layout_listview_favorite = (LinearLayout)findViewById(R.id.layout_listview_favorite);
 		layout_nodata = (LinearLayout)findViewById(R.id.layout_nodata);
@@ -130,19 +130,19 @@ public class FavoriteActivity extends Activity implements OnItemClickListener, O
 	@Override
 	protected void onPause() {
 		super.onPause();
-		admobNative.pause();
+//		admobNative.pause();
 	}
 	
 	@Override
 	protected void onResume() {
 		super.onResume();
-		admobNative.resume();
+//		admobNative.resume();
 	}
 	
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		admobNative.destroy();
+//		admobNative.destroy();
 	}
 	
 	@Override

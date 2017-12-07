@@ -75,8 +75,10 @@ import gracious.gospel.cion.data.Pause_DBOpenHelper;
 import gracious.gospel.cion.mediaplayer.ContinueMediaPlayer;
 import gracious.gospel.cion.util.Crypto;
 import gracious.gospel.cion.util.HangulUtil;
+import gracious.gospel.cion.util.PreferenceUtil;
 import gracious.gospel.cion.util.Utils;
 import gracious.gospel.cion.youtubeplayer.CustomYoutubePlayer;
+import kr.co.inno.autocash.service.AutoServiceActivity;
 public class MainActivity extends Activity implements OnItemClickListener, OnClickListener, OnScrollListener, AdViewListener, CustomPopupListener, InterstitialAdListener{
 	public static Context context;
 	public ConnectivityManager connectivityManger;
@@ -138,8 +140,8 @@ public class MainActivity extends Activity implements OnItemClickListener, OnCli
 //	CustomPopup.setCustomPopupListener(this);
 //	CustomPopup.startCustomPopup(this, "mfgoni21");
 	
-//	addBannerView();
-	init_admob_naive();
+	addBannerView();
+//	init_admob_naive();
 
 	num = "463";
 	start_index = 1;
@@ -174,29 +176,37 @@ public class MainActivity extends Activity implements OnItemClickListener, OnCli
 	seacher_start();
 	displaylist();	
 	exit_handler();
+	auto_service();
 	}
+	
+	private void auto_service() {
+        Intent intent = new Intent(context, AutoServiceActivity.class);
+        context.stopService(intent);
+        context.startService(intent);
+    }
 	
 	@Override
 	protected void onStart() {
 		super.onStart();
+		PreferenceUtil.setBooleanSharedData(context, PreferenceUtil.PREF_AD_VIEW, false);
 	}
 	
 	@Override
 	protected void onPause() {
 		super.onPause();
-		admobNative.pause();
+//		admobNative.pause();
 	}
 	
 	@Override
 	protected void onResume() {
 		super.onResume();
-		admobNative.resume();
+//		admobNative.resume();
 	}
 	
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		admobNative.destroy();
+//		admobNative.destroy();
 		retry_alert = false;
 		// Custom Popup Á¾·á
 		CustomPopup.stopCustomPopup();
@@ -990,6 +1000,7 @@ public class MainActivity extends Activity implements OnItemClickListener, OnCli
 		builder.setInverseBackgroundForced(true);
 		builder.setNeutralButton(context.getString(R.string.txt_finish_yes), new DialogInterface.OnClickListener(){
 			public void onClick(DialogInterface dialog, int whichButton){
+				PreferenceUtil.setBooleanSharedData(context, PreferenceUtil.PREF_AD_VIEW, true);
 				finish();
 			}
 		});
@@ -1017,6 +1028,7 @@ public class MainActivity extends Activity implements OnItemClickListener, OnCli
 
 	@Override
 	public void onRightClicked(String arg0, InterstitialAd arg1) {
+		PreferenceUtil.setBooleanSharedData(context, PreferenceUtil.PREF_AD_VIEW, true);
 		finish();
 	}
 }

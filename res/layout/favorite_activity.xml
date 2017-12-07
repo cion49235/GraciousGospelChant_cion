@@ -115,13 +115,13 @@
             android:textColor="#000000"/>
 	</LinearLayout>
 	 <RelativeLayout 
-	      android:visibility="gone"
           android:id="@+id/ad_layout"
           android:layout_width="fill_parent"
           android:layout_height="wrap_content" 
           android:layout_gravity="center_horizontal"> 
      </RelativeLayout>
    	<RelativeLayout 
+   	      android:visibility="gone"
 	      android:id="@+id/admob_native"
 	      android:layout_width="match_parent"
 	      android:layout_height="wrap_content"
